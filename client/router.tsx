@@ -6,6 +6,7 @@ import {
 
 import App from './components/App'
 import Home from './components/Home'
+import Shoplist from './components/Shoplist'
 
 
 export const router = createBrowserRouter(
