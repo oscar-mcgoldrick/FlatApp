@@ -1,7 +1,11 @@
+import Footer from "./Footer";
+import Shoplist from "./Shoplist";
+
 export default function Home () {
   return (
     <>
-      <p>Welcome to the home page of The Lane App</p>
+    <p>Hi And welcome to the lane shit idk lol</p>
+    <Shoplist />
     </>
   )
 }
