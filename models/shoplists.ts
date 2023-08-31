@@ -8,6 +8,10 @@ export interface UpdateShopLIst {
   list: ShoplistData
 }
 
+export interface newShopList {
+  list: string[]
+}
+
 export type Action = 
 | { type: 'SET_LIST', payload: ShoplistData[] }
 | { type: 'ADD_LIST', payload: ShoplistData }

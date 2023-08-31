@@ -11,4 +11,6 @@ export function updateShopList(shoplist: string[]) {
   return db('shoplists').update(list)
 }
 
-
+export function addShopList(list: string[]) {
+  return db('shoplists').insert(list)
+}

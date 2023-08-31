@@ -1,21 +1,13 @@
-import { join } from 'node:path'
 import express from 'express'
-import cors, { CorsOptions } from 'cors'
-
-import shoplists from './routes/shoplists'
+import path from 'path'
+import shoplistRoutes from './routes/shoplists'
 
 const server = express()
 
-server.get('/api/v1/greeting', (req, res) => {
-  const greetings = ['hola', 'hi', 'hello', 'howdy']
-  const index = Math.floor(Math.random() * greetings.length)
-  console.log(index)
-  res.json({ greeting: greetings[index] })
-})
-
 server.use(express.json())
-server.use(express.static(join(__dirname, './public')))
-server.use(cors('*' as CorsOptions))
-server.use('/api/v1/shoplists', shoplists)
+server.use(express.static(path.join(__dirname, 'public')))
+
+server.use('/api/v1/shoplists', shoplistRoutes)
+
 
 export default server
