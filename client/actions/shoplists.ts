@@ -1,6 +1,6 @@
 import * as api from '../apis/shoplists'
 import { ThunkAction } from '../store'
-import { ShoplistData } from '../../models/shoplists'
+import { ShoplistData, newShopList } from '../../models/shoplists'
 
 export const SET_LIST = 'SET_LIST'
 export const DEL_LIST = 'DEL_LIST'
@@ -21,14 +21,14 @@ export function delListAction(id: number) {
   }
 }
 
-export function addCityAction(list: ShoplistData | null) {
+export function addListAction(list: ShoplistData | null) {
   return {
     type: ADD_LIST,
     payload: list
   }
 }
 
-export function updateCityAction(id: number, list: ShoplistData) {
+export function updateListAction(id: number, list: ShoplistData) {
   return {
     type: UPDATE_LIST,
     payload: {id, list}
@@ -47,11 +47,11 @@ export function getLists(): ThunkAction {
 }
 
 
-export function addList(list: ShoplistData | null): ThunkAction {
+export function addList(newShopList: newShopList | null): ThunkAction {
   return async (dispatch) => {
     try {
-      const newList = await api.addShopList(list)
-      dispatch(addCityAction(newList))
+      const newList = await api.addShopList(newShopList.list)
+      dispatch(addListAction(newList))
     } catch (e) {
       console.error('these actions keep pooping :(', e)
     }
@@ -62,7 +62,7 @@ export function updateList(id: number, list: ShoplistData): ThunkAction {
   return async (dispatch) => {
     try {
       await api.updateShopListAPI(list)
-      dispatch(updateCityAction(id, list))
+      dispatch(updateListAction(id, list))
     } catch (e) {
       console.error('poopy hecking actions :C', e)
     }

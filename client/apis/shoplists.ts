@@ -10,6 +10,6 @@ export async function updateShopListAPI(list: ShoplistData) {
   await request.patch('/api/v1/shoplists').send(list)
 }
 
-export async function addShopList(list: ShoplistData) {
+export async function addShopList(list: string[]) {
   await request.post('api/v1/shoplilsts').send(list)
 }
