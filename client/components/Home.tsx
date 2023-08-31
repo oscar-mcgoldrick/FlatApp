@@ -1,4 +1,5 @@
 import Footer from "./Footer";
+import Joblist from "./Joblist";
 import Shoplist from "./Shoplist";
 
 export default function Home () {
@@ -6,6 +7,7 @@ export default function Home () {
     <>
     <p>Hi And welcome to the lane shit idk lol</p>
     <Shoplist />
+    <Joblist />
     </>
   )
 }
