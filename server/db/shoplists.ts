@@ -1,16 +1,10 @@
-import connection from './connection'
+import db from './index'
 
-const db = connection
-
-export function getShopList() {
-  return db('shoplists').select()
+export async function updateShopList(items: string[]) {
+  return await db.collection('flats').doc('HMS62UIfAzCaTZ39wCqX').update({shopList: [...items]})
 }
 
-export function updateShopList(shoplist: string[]) {
-  const list = shoplist
-  return db('shoplists').update(list)
-}
-
-export function addShopList(list: string[]) {
-  return db('shoplists').insert(list)
+export async function getShopList() {
+  const doc = await db.collection('flats').doc('HMS62UIfAzCaTZ39wCqX').get()
+  return doc.data().shopList
 }
