@@ -1,8 +1,8 @@
 import db from './index'
-const getUsers = db.collection('users').get()
+
 
 export async function getUsers() {
-  const list = await getUsers
+  const users = await db.collection('users').get()
 }
 
 async function test() {

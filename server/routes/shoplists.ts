@@ -15,7 +15,7 @@ router.patch('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const currentList = await db.getShopList()
-    res.send(currentList).body
+    res.send(currentList)
   } catch {
     res.sendStatus(500)
   }
