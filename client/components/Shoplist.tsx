@@ -1,15 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from "react"
-import { addList } from "../actions/shoplists"
-import { useAppDispatch } from "../hooks/hooks"
-import { updateShopListAPI, getShopListAPI } from "../apis/shoplists"
+import { addItemAPI, getShopListAPI, deleteItemAPI } from "../apis/shoplists"
 import { useEffect } from "react"
 
 export default function Shoplist() {
 
-  const [shoppingList, setShoppingList] = useState([] as null | any)
+  const [shoppingList, setShoppingList] = useState([] as string[])
   const [formItems, setFormItems] = useState('')
   const [activeList, setActiveList] = useState(null as any)
-  const dispatch = useAppDispatch()
 
   useEffect(() => {
     getShopListAPI()
@@ -21,25 +18,33 @@ export default function Shoplist() {
 
   async function handleSubmit(evt: FormEvent) {
     evt.preventDefault()
-    const shopListArr = [...shoppingList, formItems]
+    let shopListArr = [...shoppingList, formItems]
     setShoppingList(shopListArr)
-    console.log(shopListArr)
-    await updateShopListAPI(shopListArr)
+    console.log(formItems)
+    await addItemAPI(formItems)
+    shopListArr = []
   }
 
   async function handleChange(evt: ChangeEvent<HTMLInputElement>) {
-    const {value} = evt.currentTarget
+    const { value } = evt.currentTarget
     setFormItems(value)
   }
+
+  async function handleDelete(index: number) {
+    // do something to delete the item from the list
+    console.log(activeList[index])
+    await deleteItemAPI(activeList[index])
+  }
+
   return (<>
 
     <h3>Shopping list</h3>
-    {activeList && activeList.map(item => (<p>{item} <button type='button'>-</button></p>))}
-    
+    {activeList && activeList.map((item: string, i: number) => (<p key={i}>{item} <button onClick={() => handleDelete(i)} key={i} type='button'>-</button></p>))}
+
     <form onSubmit={handleSubmit}>
-      <input type='text'placeholder="Add an item here" onChange={handleChange}/>
+      <input type='text' placeholder="Add an item here" onChange={handleChange} />
       <button type="submit">Add Item to list</button>
     </form>
-    {shoppingList && shoppingList.map(item => (<p>{item}</p>))}
+    {shoppingList && <p>{shoppingList}</p>}
   </>)
 }

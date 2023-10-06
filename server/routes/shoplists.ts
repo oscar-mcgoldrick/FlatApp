@@ -5,8 +5,8 @@ import * as db from '../db/shoplists'
 
 router.patch('/', async (req, res) => {
   try {
-    const newShopList = req.body
-    await db.updateShopList(newShopList)
+    const newShopListItem = req.body.items
+    await db.addItem(newShopListItem)
   } catch {
     res.sendStatus(500)
   }
@@ -18,6 +18,17 @@ router.get('/', async (req, res) => {
     res.send(currentList)
   } catch {
     res.sendStatus(500)
+  }
+})
+
+router.delete('/', async (req, res) => {
+  try {
+    const deleteItem = req.body.item
+    console.log(req.body)
+    await db.deleteItem(deleteItem)
+  } catch (e) {
+    res.sendStatus(500)
+    console.log(e)
   }
 })
 
