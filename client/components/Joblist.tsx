@@ -1,10 +1,12 @@
-export default function Joblist() {
-  const jobListArr = ['Dishes', 'Vacuuming', 'Mopping', 'Bathrooms', 'Rubbish']
-  
+import { useEffect, useState } from "react"
+import { getJobListAPI } from "../apis/joblists"
+
+export default function Finances() {
+  const [activeJobList, setActiveJobList] = useState([] as string[])
+  const jobList = await getJobListAPI()
+  console.log(jobList)
+
   return (
-    <>
-      <p>This is the joblist innit</p>
-      <p>Shmit: </p>
-    </>
+    <h3>Job List TING</h3>
   )
 }
